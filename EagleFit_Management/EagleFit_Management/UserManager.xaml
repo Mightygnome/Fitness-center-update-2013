@@ -1,0 +1,34 @@
+﻿<Window x:Class="EagleFit_Management.UserManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="EagleFit Management: User Manager" Height="500" Width="500" Background="DarkGray">
+    <Grid>
+        <GroupBox x:Name="grpBx_addUser" Header="Add New User" HorizontalAlignment="Left" Margin="21,52,0,0" VerticalAlignment="Top" Width="446" Height="182"/>
+        <TextBox x:Name="txtBx_AddUserName" HorizontalAlignment="Left" Height="23" Margin="34,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="25" MaxLines="1"/>
+        <PasswordBox x:Name="passWdBx_password1" HorizontalAlignment="Left" Margin="182,109,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
+        <PasswordBox x:Name="passWdBx_password2" HorizontalAlignment="Left" Margin="182,167,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
+        <ComboBox x:Name="comboBx_roles" HorizontalAlignment="Left" Margin="335,109,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lbl_userName" Content="User Name:" HorizontalAlignment="Left" Margin="34,83,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lbl_password1" Content="Password:" HorizontalAlignment="Left" Margin="182,83,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lbl_role" Content="User Role:" HorizontalAlignment="Left" Margin="335,83,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lbl_confirmPW" Content="Confirm Password:" HorizontalAlignment="Left" Margin="182,141,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Button x:Name="btn_submit" Content="Submit" HorizontalAlignment="Left" Margin="335,195,0,0" VerticalAlignment="Top" Width="120" Click="btn_submit_Click"/>
+        <Label x:Name="lbl_passWdNoMatch" Content="" HorizontalAlignment="Left" Margin="167,195,0,0" VerticalAlignment="Top" Width="152" FontWeight="Bold"/>
+        <Menu HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="492">
+            <MenuItem Header="File">
+                <MenuItem Header="Close" HorizontalAlignment="Left" Width="145" Click="MenuItem_Click_Close"/>
+            </MenuItem>
+        </Menu>
+        <GroupBox x:Name="grpBx_changePassword" Header="Change Password" HorizontalAlignment="Left" Margin="21,258,0,0" VerticalAlignment="Top" Height="202" Width="446"/>
+        <Label x:Name="lbl_currencPW" Content="Current Password:" HorizontalAlignment="Left" Margin="182,287,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lbl_curUserName" Content="Username:" HorizontalAlignment="Left" Margin="44,287,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox x:Name="txt_curUserName" HorizontalAlignment="Left" Height="23" Margin="44,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="25" MaxLines="1"/>
+        <Label x:Name="lbl_newPW1" Content="New Password:" HorizontalAlignment="Left" Margin="44,353,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lbl_newPWConfirm" Content="Confirm Password:" HorizontalAlignment="Left" Margin="182,353,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Button x:Name="btn_submitChange" Content="Submit Change" HorizontalAlignment="Left" Margin="335,379,0,0" VerticalAlignment="Top" Width="120" Click="btn_submitChange_Click"/>
+        <PasswordBox x:Name="passWBx_curPass" HorizontalAlignment="Left" Margin="182,313,0,0" VerticalAlignment="Top" Width="120" MaxLength="25"/>
+        <PasswordBox x:Name="passWBx_newPass1" HorizontalAlignment="Left" Margin="44,384,0,0" VerticalAlignment="Top" Width="120" MaxLength="25"/>
+        <PasswordBox x:Name="passWBx_newPass2" HorizontalAlignment="Left" Margin="182,384,0,0" VerticalAlignment="Top" Width="120" MaxLength="25"/>
+
+    </Grid>
+</Window>
