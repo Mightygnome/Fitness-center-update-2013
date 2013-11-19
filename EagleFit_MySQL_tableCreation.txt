@@ -1,0 +1,71 @@
+create table Student_Info(
+	ID VARCHAR(8),
+	First_Name VARCHAR(25) NOT NULL,
+	Last_Name VARCHAR(25) NOT NULL,
+	Date_Created DATE,
+	FastFitness_totalVisits INT(10) NOT NULL default '0',
+	GroupEx_totalVisits INT(10) NOT NULL default '0',
+	PRIMARY KEY (ID)	
+);
+
+create table Users(
+	user_name VARCHAR(25) NOT NULL,
+	user_role VARCHAR(25) NOT NULL,
+	password VARCHAR(15) NOT NULL,
+	PRIMARY KEY (user_name)
+);
+
+create table FastFitness_Visits(
+	Visit_ID INT(10) NOT NULL AUTO_INCREMENT,
+	ID VARCHAR(8),
+	Time_In DATETIME NOT NULL default '0000-00-00 00:00:00',
+	Time_Out DATETIME NOT NULL default '0000-00-00 00:00:00',
+	PRIMARY KEY (Visit_ID),
+	FOREIGN Key (ID) REFERENCES Student_Info(ID)
+);
+
+create table GroupEx_Visits(
+	Visit_ID INT(10) NOT NULL AUTO_INCREMENT,
+	ID VARCHAR(8),
+	course_ID INT(3) NOT NULL,
+	Section_Num INT(1),	
+	Time_In DATETIME NOT NULL default '0000-00-00 00:00:00',
+	Time_Out DATETIME NOT NULL default '0000-00-00 00:00:00',
+	PRIMARY KEY (Visit_ID),
+	FOREIGN Key (ID) REFERENCES Student_Info(ID)
+);
+
+
+create table Courses(
+	course_ID INT(3) NOT NULL,
+	course_Name VARCHAR(25) NOT NULL,
+	Start_Time TIME,
+	End_Time TIME,
+	Section_Num INT(1) NOT NULL,
+	Quarter_End_Date DATE NOT NULL,
+	Credits INT(1),
+	Quarter VARCHAR(6) NOT NULL,
+	Year INT(4) NOT NULL,
+	PRIMARY KEY (course_ID, Section_Num, Quarter_End_Date)	
+);
+
+
+create table Takes(
+	ID VARCHAR(8),	
+	course_ID INT(3) NOT NULL,
+	Section_Num INT(1) NOT NULL,	
+	Quarter_End_Date DATE NOT NULL,
+	FOREIGN KEY (ID) REFERENCES Student_Info(ID),	
+	FOREIGN KEY (course_ID, Section_Num, Quarter_End_Date) REFERENCES Courses(course_ID, Section_Num, Quarter_End_Date)	
+);
+
+
+create table Additional_Activities(
+	ID VARCHAR(8),
+	Description VARCHAR(100) NOT NULL,	
+	course_ID INT(3) NOT NULL,
+	Section_Num INT(1) NOT NULL,	
+	Quarter_End_Date DATE NOT NULL,
+	FOREIGN KEY (ID) REFERENCES Student_Info(ID),
+	FOREIGN KEY (course_ID, Section_Num, Quarter_End_Date) REFERENCES Courses(course_ID, Section_Num, Quarter_End_Date)
+);
