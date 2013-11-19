@@ -1,0 +1,35 @@
+c:\users\jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\bin\Debug\EagleFitLogin.exe.config
+C:\Users\Jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\bin\Debug\EagleFitLogin.exe
+C:\Users\Jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\bin\Debug\EagleFitLogin.pdb
+C:\Users\Jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\bin\Debug\MySql.Data.dll
+C:\Users\Jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\obj\Debug\EagleFitLogin.csprojResolveAssemblyReference.cache
+C:\Users\Jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\obj\Debug\DatabaseSettings.baml
+C:\Users\Jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\obj\Debug\MainWindow.baml
+C:\Users\Jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\obj\Debug\DatabaseSettings.g.cs
+C:\Users\Jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\obj\Debug\MainWindow.g.cs
+C:\Users\Jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\obj\Debug\App.g.cs
+C:\Users\Jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\obj\Debug\EagleFitLogin_MarkupCompile.cache
+C:\Users\Jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\obj\Debug\EagleFitLogin.g.resources
+C:\Users\Jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\obj\Debug\EagleFitLogin.Properties.Resources.resources
+C:\Users\Jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\obj\Debug\EagleFitLogin.csproj.GenerateResource.Cache
+C:\Users\Jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\obj\Debug\EagleFitLogin.exe
+C:\Users\Jeremy\documents\visual studio 2012\Projects\EagleFitLogin\EagleFitLogin\obj\Debug\EagleFitLogin.pdb
+C:\Users\Jeremy\Documents\Visual Studio 2012\Projects\EagleFitLogin\EagleFitLogin\obj\Debug\InsufficientTime.baml
+C:\Users\Jeremy\Documents\Visual Studio 2012\Projects\EagleFitLogin\EagleFitLogin\obj\Debug\InsufficientTime.g.cs
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\bin\Debug\EagleFitLogin.exe.config
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\obj\Debug\EagleFitLogin.exe
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\obj\Debug\EagleFitLogin.pdb
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\bin\Debug\EagleFitLogin.exe
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\bin\Debug\EagleFitLogin.pdb
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\obj\Debug\EagleFitLogin.csprojResolveAssemblyReference.cache
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\obj\Debug\DatabaseSettings.baml
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\obj\Debug\InsufficientTime.baml
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\obj\Debug\MainWindow.baml
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\obj\Debug\DatabaseSettings.g.cs
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\obj\Debug\InsufficientTime.g.cs
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\obj\Debug\MainWindow.g.cs
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\obj\Debug\App.g.cs
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\obj\Debug\EagleFitLogin_MarkupCompile.cache
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\obj\Debug\EagleFitLogin.g.resources
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\obj\Debug\EagleFitLogin.Properties.Resources.resources
+C:\Users\Bill\Desktop\FastFitness\LoginSolution\EagleFitLogin\EagleFitLogin\obj\Debug\EagleFitLogin.csproj.GenerateResource.Cache
