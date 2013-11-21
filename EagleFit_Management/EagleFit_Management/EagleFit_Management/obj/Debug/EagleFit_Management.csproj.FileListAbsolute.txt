@@ -43,3 +43,6 @@ C:\Users\Sarah\Google Drive\EagleFit (1)\EagleFit_Management\EagleFit_Management
 C:\Users\Sarah\Google Drive\EagleFit (1)\EagleFit_Management\EagleFit_Management\EagleFit_Management\obj\Debug\EagleFit_Management.csprojResolveAssemblyReference.cache
 C:\Users\Sarah\Google Drive\EagleFit (1)\EagleFit_Management\EagleFit_Management\EagleFit_Management\obj\Debug\ClassInformation.baml
 C:\Users\Sarah\Google Drive\EagleFit (1)\EagleFit_Management\EagleFit_Management\EagleFit_Management\obj\Debug\ClassInformation.g.cs
+C:\Users\Sarah\Documents\GitHub\Fitness-center-update-2013\EagleFit_Management\EagleFit_Management\EagleFit_Management\bin\Debug\EagleFit_Management.exe.config
+C:\Users\Sarah\Documents\GitHub\Fitness-center-update-2013\EagleFit_Management\EagleFit_Management\EagleFit_Management\obj\Debug\EagleFit_Management.exe
+C:\Users\Sarah\Documents\GitHub\Fitness-center-update-2013\EagleFit_Management\EagleFit_Management\EagleFit_Management\obj\Debug\EagleFit_Management.pdb
