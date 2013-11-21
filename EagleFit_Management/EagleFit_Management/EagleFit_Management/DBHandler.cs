@@ -6,7 +6,8 @@
  Description: This class contains all of the database controls for the program. 
                All methods that write to or query from the database are housed in this class.
  
- Linked .cs/xaml Files: MainNavigation.xaml, 
+ Linked .cs/xaml Files: MainNavigation.xaml, AddMultipleUsers.xaml, AddVisit.xaml, ClassInformation.xaml, Reports.xaml,
+                        UserManager.xaml
  
  Created By: Sarah Henderson
  */
@@ -29,8 +30,15 @@ using System.Windows.Shapes;
 
 using MySql.Data.MySqlClient;
 
+//testing stuff
+//using System.Data.SqlClient;
+//using System.Data.Common.DbParameterCollection;
+
+
 using System.Runtime.Serialization.Formatters;
 using System.Security.Cryptography;
+
+using System.Globalization;
 
 namespace EagleFit_Management
 {
@@ -365,35 +373,74 @@ namespace EagleFit_Management
 	            Year INT(4) NOT NULL, PRIMARY KEY (course_ID, Section_Num, Quarter_End_Date)
                 */
 
-                MySqlCommand command = new MySqlCommand("INSERT INTO Users Courses('@course_ID', '@course_Name', '@Time_In', '@Time_Out', '@Section_Num', '@Quarter_End_Date', @Credits', '@Quarter','@Year');", conn);
+               // DataFormat df = quarterEndDat
+
+                //DateTime dtTimeObj = Convert.ToDateTime(quarterEndDate);
+                //dtTimeObj.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+                //DateTimeFormatInfo dtfi = new DateTimeFormatInfo();
+                //dtfi.ShortDatePattern = "yyyy-mm-dd";
+                //dtfi.DateSeparator = "-";
+                //DateTime objDate = Convert.ToDateTime(quarterEndDate);
+
+               
+                TimeSpan sTime = convertToTimeSpan(startTime);                
+                TimeSpan eTime = convertToTimeSpan(endTime);
+                
+                MessageBox.Show("Start Time: " + sTime.ToString("HH:mm:ss") + "end Time: " + eTime.ToString("HH:mm:ss"));              
+                //MessageBox.Show(objDate.ToString());
+
+                MySqlCommand command = new MySqlCommand("INSERT INTO Courses(@course_ID, @course_Name, @Time_In, @Time_Out, @Section_Num, @QuarterED, @Credits, @Quarter, @Year);", conn);
                 command.Parameters.AddWithValue("@course_ID", courseID);
                 command.Parameters.AddWithValue("@course_Name", className);
-                command.Parameters.AddWithValue("@Time_In", startTime);
-                command.Parameters.AddWithValue("@Time_Out", endTime);
+                command.Parameters.AddWithValue("@Time_In", MySqlDbType.Time).Value = sTime.ToString("HH:mm:ss");
+                command.Parameters.AddWithValue("@Time_Out", MySqlDbType.Time).Value = eTime.ToString("HH:mm:ss");
                 command.Parameters.AddWithValue("@Section_Num", section);
-                command.Parameters.AddWithValue("@Quarter_End_Date", quarterEndDate);
+                command.Parameters.AddWithValue("@QuarterED", MySqlDbType.Date).Value = quarterEndDate;
                 command.Parameters.AddWithValue("@Credits", credits);
                 command.Parameters.AddWithValue("@Quarter", quarter); 
                 command.Parameters.AddWithValue("@Year", year);
                 
-               
+                
                 command.ExecuteNonQuery();
 
                 return true;
 
              }//end try
 
-            catch (MySqlException)
+            catch (MySqlException noAdd)
             {
+                MessageBox.Show("No Add in Query: " + noAdd.Message);
                 return false;
             }
 
 
         }//end method addClassToDatabase
 
-        #endregion 
+
+        /*String is passed in as hh:mm:ss for Group Exercise. N/A is passed in for a fast fitness course
+         */
+        private TimeSpan convertToTimeSpan(String t)
+        {
+            if (!t.Equals("N/A"))
+            {                
+                TimeSpan time = TimeSpan.Parse(t);
+               MessageBox.Show("convertToTimeSpan: " + time);
+                return time;
+            }
+            else
+                return new TimeSpan(11, 59, 0);
+        }
+
+
+
+
+        #endregion
 
         //------------------------------------------------------------------------------------------------------
+
+
+
 
     }//end class
 }//end namespace

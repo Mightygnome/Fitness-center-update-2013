@@ -52,7 +52,7 @@ create table Takes(
 	ID VARCHAR(8),	
 	course_ID INT(3) NOT NULL,
 	Section_Num INT(1) NOT NULL,	
-	Quarter_End_Date DATE NOT NULL default '0000-00-00,
+	Quarter_End_Date DATE NOT NULL default '0000-00-00',
 	FOREIGN KEY (ID) REFERENCES Student_Info(ID),	
 	FOREIGN KEY (course_ID, Section_Num, Quarter_End_Date) REFERENCES Courses(course_ID, Section_Num, Quarter_End_Date)	
 );

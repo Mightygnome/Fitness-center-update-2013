@@ -48,36 +48,48 @@ namespace EagleFit_Management
         //---------------------- Add New User --------------------------------
         /*
          Tied to: btn_submit
+         This method adds a new user into the database.
+         
          */
         private void btn_submit_Click(object sender, RoutedEventArgs e)
         {
-            String uName;
-            String pw1;
-            String pw2;
-            String role;
-
-            uName = txtBx_AddUserName.Text;
-            pw1 = passWdBx_password1.ToString();
-            pw2 = passWdBx_password2.ToString();
-            role = (String)comboBx_roles.SelectedItem;
-            //check to make sure the passwords match
-            if (!pw1.Equals(pw2))
+            try
             {
-                lbl_passWdNoMatch.Content = "* Passwords don't match";
-                lbl_passWdNoMatch.IsEnabled = true;
-            }
-            if (pw1.Equals(pw2))
-            {
-                //pass parameters to the database
-                db.addNewLogin(uName, role, pw1);
-            }
+                String uName;
+                String pw1;
+                String pw2;
+                String role;
 
-        }
+                uName = txtBx_AddUserName.Text;
+                pw1 = passWdBx_password1.ToString();
+                pw2 = passWdBx_password2.ToString();
+                role = (String)comboBx_roles.SelectedItem;
+                //check to make sure the passwords match
+                if (!pw1.Equals(pw2))
+                {
+                    lbl_passWdNoMatch.Content = "* Passwords don't match";
+                    lbl_passWdNoMatch.IsEnabled = true;
+                }
+                if (pw1.Equals(pw2))
+                {
+                    //pass parameters to the database
+                    db.addNewLogin(uName, role, pw1);
+                }
+            }//end try
+            catch (Exception err)
+            {
+
+            }
+        }//end method btn_submit_Click
 
 
         //------------------------------ Change Password ------------------------------------
         
-
+        /*Tied to: btn_submitChange
+         This method changes the password of an existing user.
+         The method checks the users current password against the database and then changes the database entry to 
+         the new password the user has entered.
+         */
         private void btn_submitChange_Click(object sender, RoutedEventArgs e)
         {
             String curUserName = txt_curUserName.Text;

@@ -128,7 +128,7 @@ namespace EagleFit_Management
          */
         private void btn_AddClassInfo_Click(object sender, RoutedEventArgs e)
         {
-            ClassInformation ci = new ClassInformation(db);
+            ClassInformation ci = new ClassInformation();
             ci.Show();
         }
 

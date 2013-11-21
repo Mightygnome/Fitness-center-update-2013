@@ -21,12 +21,12 @@ namespace EagleFit_Management
     {
         private DBHandler db;
 
-        public ClassInformation(DBHandler db)
+        public ClassInformation()
         {
             InitializeComponent();
 
-            this.db = db;
-            
+            this.db = new DBHandler();
+            db.connectToMySql();
 
             comboBx_quarter.Items.Add("Fall");
             comboBx_quarter.Items.Add("Winter");
@@ -110,32 +110,19 @@ namespace EagleFit_Management
                 String className = txtBx_courseName.Text;
                 int section = Int32.Parse(txtBx_secNum.Text);
                 String quarterEndDate = datePkr_quarterEndDate.SelectedDate.ToString(); //formats string as mm/dd/yyyy 12:00:00         
+                             
                 int credits = Int32.Parse(txtBx_credits.Text);
 
                 String quarter = (String)comboBx_quarter.SelectedItem;
                 int year = Int32.Parse(txtBx_year.Text);
 
                 String startTime = (String)comboBx_startTime.SelectedItem;
-                if (startTime.Equals("N/A"))
-                    startTime = "00:00:00";
                 String endTime = (String)comboBx_endTime.SelectedItem;
-                if (endTime.Equals("N/A"))
-                    endTime = "00:00:00";
-
+                
                 //send string from DatePicker box to parser to reformat into DB DATE format
-                parseForDB(quarterEndDate);
+               quarterEndDate = parseForDB(quarterEndDate);
 
-                lbl_addStatus.Content = "Course successfully added.";
-
-                //clear fields
-                txtBx_courseID.Text = "";
-                txtBx_courseName.Text = "";
-                txtBx_secNum.Text = "";
-                txtBx_credits.Text = "";
-                txtBx_year.Text = "";
-
-
-                /*
+                
                 //pass information to the DBHandler class
                 bool add = db.addClassToDatabase(courseID, className, section, quarterEndDate, credits, startTime, endTime, year, quarter);
 
@@ -151,15 +138,15 @@ namespace EagleFit_Management
                 }
                 else
                 {
-                    MessageBox.Show("Add false");
+                    //MessageBox.Show("Add false");
                 }
-                 */
+                 
             }
             catch (Exception x)
             {
                 String m = x.Message;
                 lbl_addStatus.Content = "Error adding course. Check to make sure all fields are correct.";
-                //MessageBox.Show(m);
+                MessageBox.Show("Course Information catch: " + m);
             }
                         
 
@@ -203,7 +190,14 @@ namespace EagleFit_Management
         #endregion
 
 
+        //---------------------------------------------- Form Closing -----------------------------------
 
+        /* This method guarantees that the database connection is closed when the form is closed.
+         */
+        public void ClassInformation__Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            db.disconnectMySql();
+        }
 
     }//end class
 }
