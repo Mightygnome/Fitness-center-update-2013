@@ -61,6 +61,7 @@
       <DependentUpon>ClassInformation.xaml</DependentUpon>
     </Compile>
     <Compile Include="DBHandler.cs" />
+    <Compile Include="CourseObject.cs" />
     <Compile Include="Reports.xaml.cs">
       <DependentUpon>Reports.xaml</DependentUpon>
     </Compile>

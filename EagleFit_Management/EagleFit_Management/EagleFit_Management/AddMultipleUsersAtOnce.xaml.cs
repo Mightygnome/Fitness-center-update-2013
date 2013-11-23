@@ -5,7 +5,7 @@
  
  Description: This class controls all of the fields pertaining to adding multiple users to the database.
  
- Linked .cs/xaml Files: AddMultipleUsersAtOnce.xaml, AddMultipleUsersAtOnce.xaml.cs, 
+ Linked .cs/xaml Files: AddMultipleUsersAtOnce.xaml, AddMultipleUsersAtOnce.xaml.cs, DBHandler.cs, CourseObject.cs
  
  Created By: Sarah Henderson
  * 
@@ -34,19 +34,28 @@ namespace EagleFit_Management
     /// </summary>
     public partial class AddMultipleUsersAtOnce : Window
     {
+
         //class variables
         string fName1, fName2, fName3, fName4, fName5, fName6, fName7, fName8;
         string lName1, lName2, lName3, lName4, lName5, lName6, lName7, lName8;
         //int memNum1, memNum2, memNum3, memNum4, memNum5, memNum6, memNum7, memNum8;
         int totalAdded = 0;
-        
+
+        DBHandler db;
+        private List<CourseObject> cList;
+
         //Initialize Form
         public AddMultipleUsersAtOnce()
         {
             InitializeComponent();
+            db = new DBHandler();
+
             lbl_totalAdded.IsEnabled = false;
-            
+
+            //retrieve class information from DBHandler
+            cList = fillClassComboBoxes();
         }
+
 
         //------------------------------------ Menu Items --------------------------------------------
 
@@ -59,6 +68,29 @@ namespace EagleFit_Management
 
 
         // ---------------------------------- Class Methods -------------------------------------------
+
+
+        /*This method recieves a List of CourseObjects from the DBHandler and uses it to populate the courses 
+         a student can be registered for.
+         */
+        public List<CourseObject> fillClassComboBoxes()
+        {
+            List<CourseObject> c1 = db.queryCourseList();
+            foreach(CourseObject c in c1)
+            {
+                String course= "" + c.getCId() + "  " + c.getCourseName() + "   Section: " + c.getSection() + "   Start Time: " + c.getSTime() + "   " + c.getQtr() + "   " + c.getYear();
+                comboBx_course1.Items.Add(course);
+                comboBx_course2.Items.Add(course);
+                comboBx_course3.Items.Add(course);
+                comboBx_course4.Items.Add(course);
+                comboBx_course5.Items.Add(course);
+                comboBx_course6.Items.Add(course);
+                comboBx_course7.Items.Add(course);
+                comboBx_course8.Items.Add(course);
+            }
+            return c1;
+        }
+
 
 
 
@@ -80,42 +112,50 @@ namespace EagleFit_Management
             fName1 = txtBx_firstN1.Text;
             lName1 = txtBx_lastN1.Text;
             temp1 = txtBx_memNum1.Text;
-            one = addToDataBase(fName1, lName1, temp1);
+            int course1 = comboBx_course1.SelectedIndex;            
+            one = addToDataBase(fName1, lName1, temp1, course1);
             
             fName2 = txtBx_firstN2.Text;
             lName2 = txtBx_lastN2.Text;
             temp2 = txtBx_memNum2.Text;
-            two = addToDataBase(fName2, lName2, temp2);
+            int course2 = comboBx_course2.SelectedIndex;
+            two = addToDataBase(fName2, lName2, temp2, course2);
             
             fName3 = txtBx_firstN3.Text;
             lName3 = txtBx_lastN3.Text;
             temp3 = txtBx_memNum3.Text;
-            three = addToDataBase(fName3, lName3, temp3);
+            int course3 = comboBx_course3.SelectedIndex;
+            three = addToDataBase(fName3, lName3, temp3, course3);
             
             fName4 = txtBx_firstN4.Text;
             lName4 = txtBx_lastN4.Text;
             temp4 = txtBx_memNum4.Text;
-            four = addToDataBase(fName4, lName4, temp4);
+            int course4 = comboBx_course4.SelectedIndex;
+            four = addToDataBase(fName4, lName4, temp4, course4);
             
             fName5 = txtBx_firstN5.Text;
             lName5 = txtBx_lastN5.Text;
             temp5 = txtBx_memNum5.Text;
-            five = addToDataBase(fName5, lName5, temp5);
+            int course5 = comboBx_course5.SelectedIndex;
+            five = addToDataBase(fName5, lName5, temp5, course5);
             
             fName6 = txtBx_firstN6.Text;
             lName6 = txtBx_lastN6.Text;
             temp6 = txtBx_memNum6.Text;
-            six = addToDataBase(fName6, lName6, temp6);
+            int course6 = comboBx_course6.SelectedIndex;
+            six = addToDataBase(fName6, lName6, temp6, course6);
             
             fName7 = txtBx_firstN7.Text;
             lName7 = txtBx_lastN7.Text;
             temp7 = txtBx_memNum7.Text;
-            seven = addToDataBase(fName7, lName7, temp7);
+            int course7 = comboBx_course7.SelectedIndex;
+            seven = addToDataBase(fName7, lName7, temp7, course7);
             
             fName8 = txtBx_firstN8.Text;           
             lName8 = txtBx_lastN8.Text;
             temp8 = txtBx_memNum8.Text;
-            eight = addToDataBase(fName8, lName8, temp8);
+            int course8 = comboBx_course8.SelectedIndex;
+            eight = addToDataBase(fName8, lName8, temp8, course8);
 
             resetFormFields(one, two, three, four, five, six, seven, eight);
             lbl_totalAdded.IsEnabled = true;
@@ -130,15 +170,15 @@ namespace EagleFit_Management
          If the strings are empty then it does nothing with them. 
          If the strings have data in them, then it passes the data into the database.
          */
-        private bool addToDataBase(string fName, string lName, string temp)
+        private bool addToDataBase(string fName, string lName, string temp, int index)
         {
             int memNum;
-            //check to make sure that the strings are not empty and that the ID string is at least 8 character in length
+            //check to make sure that the strings are not empty and that the ID string is at least 8 characters in length
             if (!fName.Equals("") && !lName.Equals("") && !temp.Equals("") && temp.Length == 8)
             {
                 try
                 {
-                    //parse the Student ID into an int                             
+                    //parse the Student ID into an int to make sure that it is a valid ID                         
                      memNum = Int32.Parse(temp);
                 }
                 catch (Exception e)
@@ -147,6 +187,8 @@ namespace EagleFit_Management
                     return false;
                 }
                 //pass to database
+                List<CourseObject> clist= db.queryCourseList();
+                db.addStudents(memNum.ToString(), fName, lName, index, clist);
 
                 totalAdded++;
                 return true;
@@ -223,12 +265,21 @@ namespace EagleFit_Management
          */
         private void btn_done_Click(object sender, RoutedEventArgs e)
         {
+            db.disconnectMySql();
             Close();
         }
 
 
-        
 
+
+        //---------------------------------------------- Form Closing -----------------------------------
+
+        /* This method guarantees that the database connection is closed when the form is closed.
+         */
+        public void AddMultipleUsersAtOnce_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            db.disconnectMySql();
+        }
 
 
 

@@ -7,7 +7,7 @@
                All methods that write to or query from the database are housed in this class.
  
  Linked .cs/xaml Files: MainNavigation.xaml, AddMultipleUsers.xaml, AddVisit.xaml, ClassInformation.xaml, Reports.xaml,
-                        UserManager.xaml
+                        UserManager.xaml, CourseObject.cs
  
  Created By: Sarah Henderson
  */
@@ -30,11 +30,6 @@ using System.Windows.Shapes;
 
 using MySql.Data.MySqlClient;
 
-//testing stuff
-//using System.Data.SqlClient;
-//using System.Data.Common.DbParameterCollection;
-
-
 using System.Runtime.Serialization.Formatters;
 using System.Security.Cryptography;
 
@@ -53,9 +48,7 @@ namespace EagleFit_Management
         private string connectionString;
         
        private MySqlConnection conn;
-
-       //private DateTime sdate;
-       //private DateTime edate;
+       private MySqlDataReader dr;       
 
 
        #region Constructors
@@ -124,7 +117,7 @@ namespace EagleFit_Management
 
 
 
-        #region Main Window
+        #region Main Window/User Login
         //------------------------------------- Main Window ------------------------------------------
 
         /*
@@ -324,7 +317,103 @@ namespace EagleFit_Management
         //-------------------------------------- Add Multiple users---------------------------------------------------
 
 
-#endregion
+        /*This method queries the Course table of the database for any courses greater than or equal to the current year.
+         It then constructs a list of CourseObjects that is then passed back to the AddMultipleUsersAtOnce form to
+         populate the course combo box drop down.
+         */
+        public List<CourseObject> queryCourseList()
+        {
+            connectToMySql();
+            List<CourseObject> courseList = new List<CourseObject>();
+            try
+            {
+                
+
+                MySqlCommand command = new MySqlCommand("Select * from Courses where Year >= 2013;", conn);
+
+                dr = command.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    CourseObject co = new CourseObject(int.Parse(dr["course_ID"].ToString()),
+                                   dr["course_Name"].ToString(),
+                                   dr["Start_Time"].ToString(),
+                                   dr["End_Time"].ToString(),
+                                   int.Parse(dr["Section_Num"].ToString()),
+                                   dr["Quarter_End_Date"].ToString(),
+                                   int.Parse(dr["Credits"].ToString()),
+                                   dr["Quarter"].ToString(),
+                                   int.Parse(dr["Year"].ToString()));
+                    
+                    courseList.Add(co);
+                }//end while
+                return courseList;
+            }
+            catch (Exception errQ)
+            {
+                return courseList; 
+            }
+        }//end queryCourseList
+
+
+        /*
+         */
+        public void addStudents(String ID, String fName, String lName, int index, List<CourseObject> list)
+        {
+            /*Student table fields: ID VARCHAR(8), First_Name VARCHAR(25) NOT NULL, Last_Name VARCHAR(25) NOT NULL,	
+            FastFitness_totalVisits INT(10) NOT NULL default '0', GroupEx_totalVisits INT(10) NOT NULL default '0', PRIMARY KEY (ID)	
+            
+             Takes table: ID VARCHAR(8),  course_ID INT(3) NOT NULL, Section_Num INT(1) NOT NULL, Quarter_End_Date DATE NOT NULL default '0000-00-00',
+            */
+            
+            connectToMySql();
+
+            //get the course at the specified index
+            CourseObject c = list[index];
+
+            //reformat the Quarter End Date into the correct format
+            String qedFormated = parseForDB(c.getQED());
+
+            try
+            {
+                MySqlCommand command = new MySqlCommand();
+                String SQL =
+                    "INSERT INTO `Student_Info` (`ID`, `First_Name`, `Last_Name`, `FastFitness_totalVisits`, `GroupEx_totalVisits`) VALUES (@ID, @First_Name, @Last_Name, @FastFitness_totalVisits, @GroupEx_totalVisits);";
+                command.CommandText = SQL;
+                command.Parameters.AddWithValue("@ID", ID);
+                command.Parameters.AddWithValue("@First_Name", fName);
+                command.Parameters.AddWithValue("@Last_Name", lName);
+                command.Parameters.AddWithValue("@FastFitness_totalVisits", 0);
+                command.Parameters.AddWithValue("@GroupEx_totalVisits", 0);
+                command.Connection = conn;
+                command.ExecuteNonQuery();
+
+
+                MySqlCommand command2 = new MySqlCommand();
+                String SQL2 =
+                    "INSERT INTO `Takes` (`ID`, `course_ID`, `Section_Num`, `Quarter_End_Date`) VALUES (@ID, @course_ID, @Section_Num, @Quarter_End_Date);";
+                command2.CommandText = SQL2;
+                command2.Parameters.AddWithValue("@ID", ID);
+                command2.Parameters.AddWithValue("course_ID", c.getCId());
+                command2.Parameters.AddWithValue("Section_Num", c.getSection());
+                command2.Parameters.AddWithValue("Quarter_End_Date", qedFormated);
+                command2.Connection = conn;
+                command2.ExecuteNonQuery();              
+
+            }
+            catch (Exception addEx)
+            {
+                String addExcept = addEx.Message;
+                MessageBox.Show(addExcept);
+            }
+
+
+
+        }//end method addStudents
+
+
+
+        #endregion
 
 
 
@@ -372,36 +461,27 @@ namespace EagleFit_Management
                 Section_Num INT(1) NOT NULL, Quarter_End_Date DATE NOT NULL, Credits INT(1), Quarter VARCHAR(6) NOT NULL,
 	            Year INT(4) NOT NULL, PRIMARY KEY (course_ID, Section_Num, Quarter_End_Date)
                 */
-
-               // DataFormat df = quarterEndDat
-
-                //DateTime dtTimeObj = Convert.ToDateTime(quarterEndDate);
-                //dtTimeObj.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-
-                //DateTimeFormatInfo dtfi = new DateTimeFormatInfo();
-                //dtfi.ShortDatePattern = "yyyy-mm-dd";
-                //dtfi.DateSeparator = "-";
-                //DateTime objDate = Convert.ToDateTime(quarterEndDate);
-
-               
+                                      
                 TimeSpan sTime = convertToTimeSpan(startTime);                
                 TimeSpan eTime = convertToTimeSpan(endTime);
                 
-                MessageBox.Show("Start Time: " + sTime.ToString("HH:mm:ss") + "end Time: " + eTime.ToString("HH:mm:ss"));              
-                //MessageBox.Show(objDate.ToString());
-
-                MySqlCommand command = new MySqlCommand("INSERT INTO Courses(@course_ID, @course_Name, @Time_In, @Time_Out, @Section_Num, @QuarterED, @Credits, @Quarter, @Year);", conn);
+                
+                MySqlCommand command = new MySqlCommand();
+                String SQL =
+                    "INSERT INTO `Courses` (`course_ID`, `course_Name`, `Start_Time`, `End_Time`, `Section_Num`, `Quarter_End_Date`, `Credits`, `Quarter`, `Year`) VALUES (@course_ID, @course_Name, @Start_Time, @End_Time, @Section_Num, @Quarter_End_Date, @Credits, @Quarter, @Year);";
+                command.CommandText = SQL;
                 command.Parameters.AddWithValue("@course_ID", courseID);
                 command.Parameters.AddWithValue("@course_Name", className);
-                command.Parameters.AddWithValue("@Time_In", MySqlDbType.Time).Value = sTime.ToString("HH:mm:ss");
-                command.Parameters.AddWithValue("@Time_Out", MySqlDbType.Time).Value = eTime.ToString("HH:mm:ss");
+                command.Parameters.AddWithValue("@Start_Time", sTime.ToString(@"hh\:mm\:ss"));  
+                command.Parameters.AddWithValue("@End_Time", eTime.ToString(@"hh\:mm\:ss"));  
                 command.Parameters.AddWithValue("@Section_Num", section);
-                command.Parameters.AddWithValue("@QuarterED", MySqlDbType.Date).Value = quarterEndDate;
+                command.Parameters.AddWithValue("@Quarter_End_Date", quarterEndDate);
                 command.Parameters.AddWithValue("@Credits", credits);
-                command.Parameters.AddWithValue("@Quarter", quarter); 
+                command.Parameters.AddWithValue("@Quarter", quarter);
                 command.Parameters.AddWithValue("@Year", year);
-                
-                
+                command.Connection = conn;
+
+
                 command.ExecuteNonQuery();
 
                 return true;
@@ -418,14 +498,15 @@ namespace EagleFit_Management
         }//end method addClassToDatabase
 
 
-        /*String is passed in as hh:mm:ss for Group Exercise. N/A is passed in for a fast fitness course
+        /*This method parses the string from the ClassInformation start/end time combo boxes into a Timespan object
+         required by the MySQL database. String is passed in as hh:mm:ss for Group Exercise. N/A is passed in for a
+         fast fitness course.         
          */
         private TimeSpan convertToTimeSpan(String t)
         {
             if (!t.Equals("N/A"))
             {                
-                TimeSpan time = TimeSpan.Parse(t);
-               MessageBox.Show("convertToTimeSpan: " + time);
+                TimeSpan time = TimeSpan.Parse(t);               
                 return time;
             }
             else
@@ -439,6 +520,42 @@ namespace EagleFit_Management
 
         //------------------------------------------------------------------------------------------------------
 
+        #region Date Formatting
+
+        /*DatePicker returns a string in the following formats:
+         m/d/yyyy 00:00:00 AM
+         m/dd/yyyy 00:00:00 AM
+         mm/d/yyyy 00:00:00 AM
+         mm/dd/yyyy 00:00:00 AM
+         The Date field in the database requires the format yyyy-mm-dd
+         This method looks at the string returned from the datepicker and converts it to the correct format
+         */
+        private String parseForDB(String date)
+        {
+            String qed = "";
+            char[] c = date.ToCharArray();
+            if (c[1].Equals('/') && c[3].Equals('/'))//for m/d/yyyy 00:00:00 AM
+            {
+                qed = "" + c[4] + c[5] + c[6] + c[7] + "-0" + c[0] + "-0" + c[2];
+            }
+            else if (c[1].Equals('/') && c[4].Equals('/'))// m/dd/yyyy 00:00:00 AM
+            {
+                qed = "" + c[5] + c[6] + c[7] + c[8] + "-0" + c[0] + "-" + c[2] + c[3];
+            }
+            else if (c[2].Equals('/') && c[4].Equals('/'))//mm/d/yyyy 00:00:00 AM
+            {
+                qed = "" + c[5] + c[6] + c[7] + c[8] + "-" + c[0] + c[1] + "-0" + c[3];
+            }
+            else if (c[2].Equals('/') && c[5].Equals('/'))//mm/dd/yyyy 00:00:00 AM
+            {
+                qed = "" + c[6] + c[7] + c[8] + c[9] + "-" + c[0] + c[1] + "-" + c[3] + c[4];
+            }
+            //MessageBox.Show(qed);
+            return qed;
+
+        }
+
+        #endregion 
 
 
 

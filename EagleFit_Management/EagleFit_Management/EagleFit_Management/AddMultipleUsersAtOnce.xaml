@@ -43,48 +43,35 @@
         <TextBox x:Name="txtBx_firstN8" HorizontalAlignment="Left" Height="20" Margin="210,321,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" MaxLines="1"/>
         <TextBox x:Name="txtBx_lastN8" HorizontalAlignment="Left" Height="20" Margin="346,321,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" MaxLines="1"/>
         
-        <Label x:Name="lbl_mem1" Content="Member 1" HorizontalAlignment="Left" Margin="29,74,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_mem2" Content="Member 2" HorizontalAlignment="Left" Margin="29,109,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_mem3" Content="Member 3" HorizontalAlignment="Left" Margin="29,145,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_mem4" Content="Member 4" HorizontalAlignment="Left" Margin="29,176,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_mem5" Content="Member 5" HorizontalAlignment="Left" Margin="29,214,0,0" VerticalAlignment="Top" RenderTransformOrigin="-8.556,-1.638"/>
-        <Label x:Name="lbl_mem6" Content="Member 6" HorizontalAlignment="Left" Margin="29,251,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_mem7" Content="Member 7" HorizontalAlignment="Left" Margin="29,286,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_mem8" Content="Member 8" HorizontalAlignment="Left" Margin="29,321,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_mem1" Content="Member 1" HorizontalAlignment="Left" Margin="29,74,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lbl_mem2" Content="Member 2" HorizontalAlignment="Left" Margin="29,109,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lbl_mem3" Content="Member 3" HorizontalAlignment="Left" Margin="29,145,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lbl_mem4" Content="Member 4" HorizontalAlignment="Left" Margin="29,176,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lbl_mem5" Content="Member 5" HorizontalAlignment="Left" Margin="29,214,0,0" VerticalAlignment="Top" RenderTransformOrigin="-8.556,-1.638" FontWeight="Bold"/>
+        <Label x:Name="lbl_mem6" Content="Member 6" HorizontalAlignment="Left" Margin="29,251,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lbl_mem7" Content="Member 7" HorizontalAlignment="Left" Margin="29,286,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lbl_mem8" Content="Member 8" HorizontalAlignment="Left" Margin="29,321,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
 
         
 
-        <Label x:Name="lbl_idHeader" Content="ID" HorizontalAlignment="Left" Margin="112,48,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_firstNHeader" Content="First Name" HorizontalAlignment="Left" Margin="210,48,0,0" VerticalAlignment="Top" RenderTransformOrigin="-4.313,-4.077"/>
-        <Label x:Name="lbl_lastNHeader" Content="Last Name" HorizontalAlignment="Left" Margin="346,48,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="datePkr_lastDayQtr1" HorizontalAlignment="Left" Margin="748,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.029,-0.125" Width="132" Height="27"/>
-        <Label x:Name="lbl_expireDate" Content="Last Day of Quarter" HorizontalAlignment="Left" Margin="748,48,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBx_catName1" HorizontalAlignment="Left" Margin="472,74,0,0" VerticalAlignment="Top" Width="145" Height="20"/>
-        <Label x:Name="lbl_defaultCatNam" Content="Default Category Name" HorizontalAlignment="Left" Margin="472,48,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBx_secNum1" HorizontalAlignment="Left" Margin="637,74,0,0" VerticalAlignment="Top" Width="96" Height="20"/>
-        <Label x:Name="lbl_sectionNum" Content="Section Number" HorizontalAlignment="Left" Margin="635,48,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="2.045"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="0.464"/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
+        <Label x:Name="lbl_idHeader" Content="ID" HorizontalAlignment="Left" Margin="112,48,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lbl_firstNHeader" Content="First Name" HorizontalAlignment="Left" Margin="210,48,0,0" VerticalAlignment="Top" RenderTransformOrigin="-4.313,-4.077" FontWeight="Bold"/>
+        <Label x:Name="lbl_lastNHeader" Content="Last Name" HorizontalAlignment="Left" Margin="346,48,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <ComboBox x:Name="comboBx_course1" HorizontalAlignment="Left" Margin="472,74,0,0" VerticalAlignment="Top" Width="418" Height="20"/>
+        <Label x:Name="lbl_courseInformation" Content="Course Information:" HorizontalAlignment="Left" Margin="472,48,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Menu HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="932">
             <MenuItem Header="File">
                 <MenuItem Header="Close" HorizontalAlignment="Left" Width="145" Click="MenuItem_Click_Exit"/>
             </MenuItem>
         </Menu>
         <Label x:Name="lbl_totalAdded" Content="" HorizontalAlignment="Left" Margin="285,408,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.5,0.769" Width="348" FontSize="18" IsEnabled="False"/>
-        <ComboBox x:Name="comboBx_secNum2" HorizontalAlignment="Left" Margin="637,107,0,0" VerticalAlignment="Top" Width="96" Height="20"/>
-        <ComboBox x:Name="comboBx_secNum3" HorizontalAlignment="Left" Margin="637,145,0,0" VerticalAlignment="Top" Width="96" Height="20"/>
-        <ComboBox x:Name="comboBx_secNum4" HorizontalAlignment="Left" Margin="637,179,0,0" VerticalAlignment="Top" Width="96" Height="20"/>
-        <ComboBox x:Name="comboBx_secNum5" HorizontalAlignment="Left" Margin="637,214,0,0" VerticalAlignment="Top" Width="96" Height="20"/>
-        <ComboBox x:Name="comboBx_secNum6" HorizontalAlignment="Left" Margin="637,251,0,0" VerticalAlignment="Top" Width="96" Height="20"/>
-        <ComboBox x:Name="comboBx_secNum7" HorizontalAlignment="Left" Margin="637,286,0,0" VerticalAlignment="Top" Width="96" Height="20"/>
-        <ComboBox x:Name="comboBx_secNum8" HorizontalAlignment="Left" Margin="637,321,0,0" VerticalAlignment="Top" Width="96" Height="20"/>
+        <ComboBox x:Name="comboBx_course2" HorizontalAlignment="Left" Margin="472,109,0,0" VerticalAlignment="Top" Width="418" Height="20"/>
+        <ComboBox x:Name="comboBx_course3" HorizontalAlignment="Left" Margin="472,145,0,0" VerticalAlignment="Top" Width="418" Height="20"/>
+        <ComboBox x:Name="comboBx_course4" HorizontalAlignment="Left" Margin="472,180,0,0" VerticalAlignment="Top" Width="418" Height="20"/>
+        <ComboBox x:Name="comboBx_course5" HorizontalAlignment="Left" Margin="472,218,0,0" VerticalAlignment="Top" Width="418" Height="20"/>
+        <ComboBox x:Name="comboBx_course6" HorizontalAlignment="Left" Margin="472,251,0,0" VerticalAlignment="Top" Width="418" Height="20"/>
+        <ComboBox x:Name="comboBx_course7" HorizontalAlignment="Left" Margin="472,286,0,0" VerticalAlignment="Top" Width="418" Height="20"/>
+        <ComboBox x:Name="comboBx_course8" HorizontalAlignment="Left" Margin="475,321,0,0" VerticalAlignment="Top" Width="415" Height="20"/>
 
 
 
